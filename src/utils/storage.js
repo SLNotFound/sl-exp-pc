@@ -1,7 +1,3 @@
-// localStorage.setItem(键， 值)
-// localStorage.getItem(键)
-// localStorage.removeItem(键)
-
 const KEY = 'my-token-element-pc'
 
 // 直接用按需导出，可以导出多个
