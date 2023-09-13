@@ -10,8 +10,8 @@
           <el-input type="password" placeholder="请输入密码：" v-model="form.password"/>
         </el-form-item>
         <el-form-item class="tc">
-          <el-button @click="submitForm('form')" type="primary">登录</el-button>
-          <el-button @click="resetForm('form')">重置</el-button>
+          <el-button @click="login" type="primary">登录</el-button>
+          <el-button @click="reset">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -40,18 +40,16 @@ export default {
     }
   },
   methods: {
-    submitForm (formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          alert('submit!')
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
+    async login () {
+      try {
+        await this.$refs.form.validate()
+        this.$store.dispatch('user/loginAction', this.form)
+      } catch (e) {
+        console.log(e)
+      }
     },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
+    reset () {
+      this.$refs.form.resetFields()
     }
   }
 }

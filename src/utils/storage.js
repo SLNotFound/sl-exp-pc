@@ -1,8 +1,5 @@
 const KEY = 'my-token-element-pc'
 
-// 直接用按需导出，可以导出多个
-// 但是按需导出，导入时必须 import { getToken } from '模块名导入'
-
 // 获取
 export const getToken = () => {
   return localStorage.getItem(KEY)
