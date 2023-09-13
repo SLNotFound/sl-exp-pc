@@ -2,7 +2,7 @@
   <div class="login-page">
     <el-card class="login-card">
       <template #header>管理后台</template>
-      <el-form :model="form" :rules="rules">
+      <el-form :model="form" :rules="rules" ref="form">
         <el-form-item label="用户名：" prop="username">
           <el-input placeholder="请输入用户名" v-model="form.username"/>
         </el-form-item>
@@ -10,8 +10,8 @@
           <el-input type="password" placeholder="请输入密码：" v-model="form.password"/>
         </el-form-item>
         <el-form-item class="tc">
-          <el-button type="primary">登录</el-button>
-          <el-button>重置</el-button>
+          <el-button @click="submitForm('form')" type="primary">登录</el-button>
+          <el-button @click="resetForm('form')">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -37,6 +37,21 @@ export default {
           { min: 5, max: 16, message: '长度在 5 到 16 个字符', trigger: ['blur', 'change'] }
         ]
       }
+    }
+  },
+  methods: {
+    submitForm (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          alert('submit!')
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
+    },
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
     }
   }
 }
