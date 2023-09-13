@@ -1,7 +1,14 @@
 /* 改变主题色变量 */
-$--color-primary: teal;
+$--color-primary: rgba(114,124,245,1);
 
 /* 改变 icon 字体路径变量，必需 */
 $--font-path: '~element-ui/lib/theme-chalk/fonts';
 
 @import "~element-ui/packages/theme-chalk/src/index";
+
+//初始化body样式
+body {
+    margin: 0;
+    padding: 0;
+    background: #fafbfe;
+}

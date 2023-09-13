@@ -9,7 +9,7 @@
         <el-form-item label="密码：">
           <el-input placeholder="请输入密码：" />
         </el-form-item>
-        <el-form-item>
+        <el-form-item class="tc">
           <el-button type="primary">登录</el-button>
           <el-button>重置</el-button>
         </el-form-item>
