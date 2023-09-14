@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
 import store from '@/store'
+import router from '@/router'
 
 const request = axios.create({
   baseURL: 'http://interview-api-t.itheima.net/',
@@ -26,7 +27,15 @@ request.interceptors.response.use(function (response) {
   return response.data
 }, function (error) {
   if (error.response) {
-    Message.error(error.response.data.message)
+    if (error.response.status === 401) {
+      Message.error('token已失效，请重新登录！')
+
+      store.commit('user/logout')
+
+      router.push('/login')
+    } else {
+      Message.error(error.response.data.message)
+    }
   }
   // 对响应错误做点什么
   return Promise.reject(error)
