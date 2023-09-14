@@ -6,3 +6,7 @@ export const login = ({ username, password }) => {
     password
   })
 }
+
+export const getUser = () => {
+  return request.get('/auth/currentUser')
+}
