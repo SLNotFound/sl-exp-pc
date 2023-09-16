@@ -27,6 +27,7 @@ request.interceptors.response.use(function (response) {
   return response.data
 }, function (error) {
   if (error.response) {
+    console.log(error.response.status)
     if (error.response.status === 401) {
       Message.error('token已失效，请重新登录！')
       // 提交清除的mutation，完成失效token的移除

@@ -35,19 +35,19 @@
 
       <!-- 第二行，每一项占8份 -->
       <el-col :span="8">
-        <el-card style="height: 420px" shadow="never">
+        <el-card style="height: 520px" shadow="never">
           <h4>性别分布情况</h4>
           <img style="margin-top: 60px" src="@/assets/chart-03.png" alt="" />
         </el-card>
       </el-col>
       <el-col :span="8">
-        <el-card style="height: 420px" shadow="never">
+        <el-card style="height: 520px" shadow="never">
           <h4>浏览访问情况</h4>
           <img src="@/assets/chart-01.svg" alt="" />
         </el-card>
       </el-col>
       <el-col :span="8">
-        <el-card style="height: 420px" shadow="never">
+        <el-card style="height: 520px" shadow="never">
           <h4>设备系统访问情况</h4>
           <img style="margin-top: 20px" src="@/assets/chart-02.svg" alt="" />
         </el-card>
