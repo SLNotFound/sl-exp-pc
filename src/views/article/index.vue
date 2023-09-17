@@ -9,6 +9,7 @@
         <div class="header">
           <span>共 {{ total }} 条记录</span>
           <el-button
+            @click="openDrawer('add')"
             icon="el-icon-plus"
             size="small"
             type="primary"
@@ -28,8 +29,8 @@
         <el-table-column label="操作">
           <template #default="obj">
             <div class="actions">
-              <i class="el-icon-view"></i>
-              <i class="el-icon-edit-outline"></i>
+              <i @click="openDrawer('preview', obj.row.id)" class="el-icon-view"></i>
+              <i @click="openDrawer('edit', obj.row.id)" class="el-icon-edit-outline"></i>
               <i @click="del(obj.row.id)" class="el-icon-delete"></i>
             </div>
           </template>
@@ -44,6 +45,15 @@
         :total="total">
       </el-pagination>
     </el-card>
+    <el-drawer
+      title="我是标题"
+      :visible.sync="isShowDrawer"
+      direction="rtl"
+      :before-close="handleClose"
+      size="50%"
+    >
+      <span>我来啦！</span>
+    </el-drawer>
   </div>
 </template>
 
@@ -56,13 +66,23 @@ export default {
       tableData: [],
       current: 1,
       pageSize: 10,
-      total: 0
+      total: 0,
+      isShowDrawer: false
     }
   },
   created () {
     this.initData()
   },
   methods: {
+    handleClose (done) {
+      this.$confirm('您确定要关闭吗？').then(() => {
+        done()
+      }).catch(() => {
+      })
+    },
+    openDrawer () {
+      this.isShowDrawer = true
+    },
     async initData () {
       const { data } = await getarticleList({
         current: this.current,
