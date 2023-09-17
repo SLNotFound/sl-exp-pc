@@ -36,13 +36,12 @@
         </el-table-column>
       </el-table>
       <el-pagination
-        @size-change="handleSizeChange"
+        background
         @current-change="handleCurrentChange"
-        :current-page="currentPage4"
-        :page-sizes="[100, 200, 300, 400]"
-        :page-size="100"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="400">
+        :current-page="current"
+        :page-size="pageSize"
+        layout="prev, pager, next"
+        :total="total">
       </el-pagination>
     </el-card>
   </div>
@@ -74,6 +73,10 @@ export default {
     },
     del (id) {
       console.log(id)
+    },
+    handleCurrentChange (val) {
+      this.current = val
+      this.initData()
     }
   }
 }
