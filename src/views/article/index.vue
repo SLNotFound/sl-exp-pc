@@ -7,7 +7,7 @@
     <el-card shadow="never" border="false">
       <template #header>
         <div class="header">
-          <span>共 300 条记录</span>
+          <span>共 {{ total }} 条记录</span>
           <el-button
             icon="el-icon-plus"
             size="small"
@@ -17,20 +17,64 @@
           </el-button>
         </div>
       </template>
-
+      <el-table
+        :data="tableData"
+        style="width: 100%">
+        <el-table-column prop="stem" label="标题" width="400"></el-table-column>
+        <el-table-column prop="creator" label="作者"></el-table-column>
+        <el-table-column prop="likeCount" label="点赞"></el-table-column>
+        <el-table-column prop="views" label="浏览数"></el-table-column>
+        <el-table-column prop="createdAt" label="更新时间"></el-table-column>
+        <el-table-column label="操作">
+          <template #default="obj">
+            <div class="actions">
+              <i class="el-icon-view"></i>
+              <i class="el-icon-edit-outline"></i>
+              <i @click="del(obj.row.id)" class="el-icon-delete"></i>
+            </div>
+          </template>
+        </el-table-column>
+      </el-table>
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage4"
+        :page-sizes="[100, 200, 300, 400]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="400">
+      </el-pagination>
     </el-card>
   </div>
 </template>
 
 <script>
+import { getarticleList } from '@/api/article'
 export default {
   name: 'article-page',
   data () {
-    return {}
+    return {
+      tableData: [],
+      current: 1,
+      pageSize: 10,
+      total: 0
+    }
   },
   created () {
+    this.initData()
   },
   methods: {
+    async initData () {
+      const { data } = await getarticleList({
+        current: this.current,
+        pageSize: this.pageSize
+      })
+      this.total = data.total
+      this.tableData = data.rows
+    },
+    del (id) {
+      console.log(id)
+    }
   }
 }
 </script>
